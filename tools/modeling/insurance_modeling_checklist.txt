@@ -1,0 +1,67 @@
+Steps in modeling: 
+	Data assembly and QA
+		Time cost
+			Exposure, Loss and premium
+			Attributes:
+		control totals: (total loss, exposure, record) 
+			monitor on raw
+			track accross data
+			Waterfalls and filters
+	eda 
+		Time cost
+		summary statistics and hit rates
+		evaluation of data across segments
+		comparisons in distributions on segments
+	sample
+		Time cost
+		train/test/hold out
+		Coarse sampling
+		stratified sampling 
+	feature_engineering   
+		Time cost: 
+		binning
+		imputation
+    univariate analyisis                                                                                
+		charts pivot tables
+		graphs
+	modeling
+		Time cost: 
+		variable selection
+		multicolinearity
+			VIFs
+			correlation matrices
+		Build a model 
+		Model logging
+		metrics: 
+			[gini] (SZ)
+				gini_1 / gini_2 = 1.1 = very large improvement
+				15%-60% depending
+			[total Deviance]
+				Need to do it - (Shawn)
+			[ASE Average Square Error for lift chart]
+				score_len < 1000 pre_bin, otherwise just mse
+			Generic method
+				establish baselines using LO 
+				OR establish baselines using Random noise for evaluation
+				OR drop top variable
+		Types of binning: 
+		exhibits 
+			Time cost: 
+			[Lift Charts]
+            Lorenz curves
+			Performance on segments
+	Model QA 
+	Documentation & Deployment
+		Specs
+
+Next Steps: Evaluation metrics: 
+	Binning 
+		fixed width, n 
+		fixed quantiles, 
+		passed values
+	Lift Chart  
+	Lorenz curve (check)
+	MAE (check)
+	MSE (check)
+	gini (chekc)
+

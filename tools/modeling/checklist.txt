@@ -1,0 +1,80 @@
+Modeling Checklist: 
+
+Overall: 
+	What is the business objective of the analysis
+	What is the baseline score to be out performed
+    Is the project checked into git?
+Exploratory Data Analysis:
+    Set control totals (enables data checks later): 
+        On raw data what is the total loss, premium, exposure. Save these for later reference
+	What is the atomic unit of risk (level at which modeling will occur)
+        What fields define an atom/indivisible risk unit
+		How many records are there?
+		Are dupes present? if so why?
+	target variable: 
+		Produce summary statistics, quantiles and histogram	
+            (optionally log( +1)
+		Produce summary statistics, quantiles and histogram	when > 0 
+            (optionally log)
+		What is done to cap censor extreme values
+            How much loss will be omited when caped/censored
+	Produce summary statistics on predictor variables (features).
+		Including missing/fillrates.
+	Spot check extreme observations:
+		e.g. 5 largest/smallest >0 in terms of premium, exposure, loss, loss ratio. Does it look reasonable? checking smalles loss >0, etc can spot mistakes
+		filter/cap's needed?
+    Split the data into training, validation and hold out sets.
+        is there any way to have the holdout split and out of time split
+        Can sampling be done using a more aggregated level in order to create test data that is more similar to "out of time" data
+            e.g. sample at policy num or zip level
+    Segments: (based on premium size, exposure size, population density, New/Renewal business, type of coverage, Inception year)
+        produce aggregates statistics for loss, loss severity, claim, frequency, exposure and premium by group for segments 		
+        Are these reasonable? 
+       	Any filters needed? Too small, too large, too new, too old, unusual coverage, buggy data? 
+    Have statistics and spot checks been reviewed)?
+    Create Good To Model (GTM) data: 
+        auto apply filters, and read and process (or load from static)
+            if loading from static, option to regenerate should be used
+        Update control totals if apropos.
+    Is EDA in git
+Feature Engineering: (itterative, with feature selection// )
+	optional-create ratios? 
+	optional-log transform? 
+    optional-cap/censor? 
+	optional: imputation and missing indicators? (can hold/revist after feature selection)
+    linearize/ohe categorical data. 
+Feature Selection:
+	Remove irrelevant or redundant features.
+    What are the top predictors in terms of univariate statistics (e.g. KS) or graphs, e.g. bivariates
+    What are the top predictors for an ML model, e.g. GBM, in terms of feature importance
+    What are the top predictors in terms regularized models
+    Top predictor list (for some choosen methods)
+    For top predictors (any type), create bivariates of top predictors
+	Consider feature engineering (e.g., creating interaction terms, log transform, polynomial features).    
+Data Preprocessing:
+    create a function that processes loaded data into modeling attributes
+    Handle missing values (impute or remove rows/columns).
+	Standardize or normalize numerical features.
+	Encode categorical features (one-hot encoding or label encoding).
+    has this code been peer reviewed
+    has this code been checked into git
+GLM model build: 
+    code reviewed and in git?
+    Document the variable 
+    Plot residuals of used variables
+    Review missing imputation/flags
+    Check VIFs    
+Model performance:     
+    on segments
+    overall 
+    train/test/hold-out
+    Use an order statistic, KS or gini to quantify lift, Lorenz curve   
+    check control totals
+    check for dupes
+Deployment
+    Is the modeling object saved?
+        joblib.dump() <<< save the obeject as a file
+    Is the enviroment?
+        modeling enviroment, >>> pipenv, py version () 
+    Saving data?
+    
